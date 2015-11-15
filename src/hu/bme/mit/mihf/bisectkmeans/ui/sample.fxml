@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.canvas.*?>
+<?import javafx.scene.chart.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+
+<GridPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+          fx:controller="hu.bme.mit.mihf.bisectkmeans.ui.Controller">
+    <columnConstraints>
+        <ColumnConstraints/>
+        <ColumnConstraints/>
+        <ColumnConstraints/>
+        <ColumnConstraints/>
+        <ColumnConstraints/>
+        <ColumnConstraints/>
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints/>
+        <RowConstraints/>
+        <RowConstraints/>
+        <RowConstraints/>
+        <RowConstraints/>
+    </rowConstraints>
+    <children>
+        <TextField GridPane.columnIndex="0" GridPane.columnSpan="5" GridPane.rowIndex="0"/>
+        <Button onAction="#onBtnLoadFileClick" text="Fájl betöltése" GridPane.columnIndex="5" GridPane.rowIndex="0"/>
+
+        <Label text="Osztályok száma" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+        <TextField GridPane.columnIndex="1" GridPane.rowIndex="1"
+                   prefWidth="30"/>
+        <Label text="Kezdővektor" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+        <ComboBox GridPane.columnIndex="3" GridPane.rowIndex="1"/>
+        <Label text="Metrika" GridPane.columnIndex="4" GridPane.rowIndex="1"/>
+        <ComboBox GridPane.columnIndex="5" GridPane.rowIndex="1"/>
+
+        <Label text="Leállási feltétel állítás" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+        <TextField GridPane.columnIndex="1" GridPane.columnSpan="5" GridPane.rowIndex="2"/>
+
+        <ToggleButton GridPane.rowIndex="3" GridPane.columnIndex="0"
+                      text="Megjelenítés lépésenként"/>
+        <Button text="Algoritmus indítása" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+        <ProgressBar progress="0.5" GridPane.columnIndex="2" GridPane.columnSpan="4" GridPane.rowIndex="3"/>
+
+        <Canvas height="200" GridPane.columnIndex="0" GridPane.columnSpan="6" GridPane.rowIndex="4"/>
+    </children>
+</GridPane>
