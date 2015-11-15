@@ -1,6 +1,11 @@
 .root {
-    -fx-background-color: gold;
+    -fx-background-color: #EEEEEE;
 }
 .label {
-    -fx-font-size: 20;>
+    -fx-font-size: 14;
+}
+#rootGridPane {
+    -fx-padding: 5 5 5 5;
+    -fx-vgap: 5;
+    -fx-hgap: 5;
 }

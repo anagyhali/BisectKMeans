@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.canvas.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<GridPane fx:id="rootGridPane"
+          stylesheets="/hu/bme/mit/mihf/bisectkmeans/ui/mainstyle.css"
+          xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+          fx:controller="hu.bme.mit.mihf.bisectkmeans.ui.Controller">
+    <columnConstraints>
+        <ColumnConstraints minWidth="150"/>
+        <ColumnConstraints minWidth="150"/>
+        <ColumnConstraints minWidth="150"/>
+        <ColumnConstraints minWidth="200"/>
+        <ColumnConstraints minWidth="150"/>
+        <ColumnConstraints minWidth="200"/>
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints />
+        <RowConstraints />
+        <RowConstraints />
+        <RowConstraints />
+        <RowConstraints minHeight="500"/>
+        <RowConstraints />
+    </rowConstraints>
+    <children>
+        <TextField fx:id="textFieldLoadFile" GridPane.columnIndex="0" GridPane.columnSpan="5" GridPane.rowIndex="0" />
+        <Button fx:id="btnFileChooser" onAction="#onFileChooserClick" text="Fájl kiválasztása" GridPane.columnIndex="5" GridPane.rowIndex="0" />
+
+        <Label text="Osztályok száma" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+        <TextField fx:id="textFieldNumberOfClusters" prefWidth="30" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+        <Label text="Kezdővektor" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+        <ComboBox fx:id="comboBoxStartVector" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+        <Label text="Metrika" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+        <ComboBox fx:id="comboBoxMetrics" GridPane.columnIndex="5" GridPane.rowIndex="1" />
+
+        <Label text="Leállási feltétel állítás" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+        <TextField fx:id="textFieldStopStatement" GridPane.columnIndex="1" GridPane.columnSpan="5" GridPane.rowIndex="2" />
+
+        <ToggleButton fx:id="toggleBtnViewSteps" text="Megjelenítés lépésenként" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+        <Button fx:id="btnStartAlgorithm" onAction="#startAlgorithm" text="Algoritmus indítása" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+        <Button fx:id="btnNextStep" disable="true" onAction="#nextStep" text="Következő lépés" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+        <Button fx:id="btnStopAlgorithm" disable="true" onAction="#stopAlgorithm" text="Állj" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+        <ProgressBar progress="0.5" GridPane.columnIndex="4" GridPane.columnSpan="2" GridPane.rowIndex="3" />
+
+        <Canvas fx:id="canvasDiagram" GridPane.columnIndex="0" GridPane.columnSpan="6" GridPane.rowIndex="4" width="1000" height="500" />
+        <Label fx:id="labelInfoBar" GridPane.columnIndex="0" GridPane.columnSpan="6" GridPane.rowIndex="5" />
+    </children>
+</GridPane>
