@@ -46,6 +46,7 @@ public class Loader extends Thread {
                     for (int i = 1; i < 14; i++) {
                         info.numberOfVertices[i - 1] = Integer.parseInt(split[i]);
                     }
+                    model.add(info);
                 }
             }
 

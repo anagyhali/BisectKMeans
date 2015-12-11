@@ -176,24 +176,150 @@ public class Controller {
     }
 
     private void showInitialState(DataModel model) {
-        //placeholder
         GraphicsContext gc = canvasDiagram.getGraphicsContext2D();
-        gc.setFill(javafx.scene.paint.Color.TEAL);
-        gc.fillRect(0,0,canvasDiagram.getWidth(),canvasDiagram.getHeight());
+        gc.setStroke(javafx.scene.paint.Color.RED);
+        int x1=10;
+        int y1=10;
+        double x2=canvasDiagram.getWidth()-30;
+        double y2 =canvasDiagram.getHeight()-30;
+        gc.strokeRect(x1,y1,x2-10,y2-10);
+        //FOK
+        int n=model.get(0).numberOfVertices.length;
+
+        for (DataModel.GraphInfo trial: model) {
+            double max = getMax(trial.numberOfVertices);
+
+            Color cols[] = {Color.DARKMAGENTA, Color.BLUE, Color.ORANGE, Color.OLIVE, Color.AQUA, Color.BROWN,
+                    Color.PURPLE, Color.CHOCOLATE, Color.YELLOWGREEN, Color.GRAY, Color.DARKKHAKI, Color.LIGHTSALMON, Color.LIGHTCORAL,
+                    Color.LAWNGREEN};
+            for (int i = 0; i < n; i++) {
+                double width = x2 - x1 - 20;
+                double height = y2 - y1;
+                gc.setStroke(cols[i]);
+                gc.setFill(cols[i]);
+                double x = (width / (n + 1)) * (i + 1) + 20;
+                double y = height - (height / max * trial.numberOfVertices[i]) + 10;
+                gc.strokeLine(x, y2, x, y1);
+            }
+
+            for (int i = 0; i < n; i++) {
+                double width = x2 - x1 - 20;
+                double height = y2 - y1;
+                double x = (width / (n + 1)) * (i + 1) + 20;
+                double y = height - (height / max * trial.numberOfVertices[i]) + 10;
+                gc.setStroke(cols[i]);
+                gc.setFill(cols[i]);
+                gc.strokeText("[" + i + "]", x, y2 + 15);
+                gc.fillRect(x, y, 5, 5);
+                if (i != n - 1) {
+                    gc.strokeLine(x, y, (width / (n + 1)) * (i + 2) + 20, height - (height / max * trial.numberOfVertices[i + 1]) + 10);
+                }
+            }
+        }
+
     }
 
+    public static int getMax(int[] inputArray){
+        int maxValue = inputArray[0];
+        for(int i=1;i < inputArray.length;i++){
+            if(inputArray[i] > maxValue){
+                maxValue = inputArray[i];
+            }
+        }
+        return maxValue;
+    }
+
+
     private void showResult(ArrayList<DataModel> result) {
-        //placeholder
+        if (1 == 1)return;
         GraphicsContext gc = canvasDiagram.getGraphicsContext2D();
-        gc.setFill(javafx.scene.paint.Color.GREEN);
-        gc.fillRect(0,0,canvasDiagram.getWidth(),canvasDiagram.getHeight());
+        gc.setStroke(javafx.scene.paint.Color.RED);
+        int x1=10;
+        int y1=10;
+        double x2=canvasDiagram.getWidth()-30;
+        double y2 =canvasDiagram.getHeight()-30;
+        gc.strokeRect(x1,y1,x2-10,y2-10);
+        //FOK
+        int n=13;
+
+        int trial[]= {1,2,3,4,4,4,5,5,56,4,67,8,54};
+        int max = getMax(trial);
+
+        Color cols[] ={Color.DARKMAGENTA,Color.BLUE,Color.ORANGE,Color.OLIVE,Color.AQUA,Color.BROWN,
+                Color.PURPLE,Color.CHOCOLATE,Color.YELLOWGREEN,Color.GRAY,Color.DARKKHAKI,Color.LIGHTSALMON, Color.LIGHTCORAL,
+                Color.LAWNGREEN};
+        for(int i=0; i<n;i++) {
+            double width = x2 - x1 - 20;
+            double height = y2 - y1;
+            gc.setStroke(cols[i]);
+            gc.setFill(cols[i]);
+            double x = (width / (n + 1)) * (i + 1) + 20;
+            double y = height - (height / max * trial[i]) + 10;
+            gc.strokeLine(x, y2, x, y1);
+        }
+
+        for(DataModel item : result){
+            for(int i=0; i<n;i++) {
+                double width = x2 - x1 - 20;
+                double height = y2 - y1;
+                double x = (width / (n + 1)) * (i + 1) + 20;
+                double y = height - (height / max * trial[i]) + 10;
+                gc.setStroke(cols[i]);
+                gc.setFill(cols[i]);
+                gc.strokeText("["+i+"]",x,y2+15);
+                gc.fillRect(x,y,5,5);
+                if(i!=n-1){
+                    gc.strokeLine(x,y,(width/(n+1))*(i+2)+20,height - (height/max*trial[i+1])+10);
+                }
+            }
+        }
+
     }
 
     private void showPartialResult(ArrayList<DataModel> partialResult) {
-        //placeholder
+        if (1 == 1)return;
         GraphicsContext gc = canvasDiagram.getGraphicsContext2D();
-        gc.setFill(new Color(1, 1, 0, partialResult.size() / (double)Integer.parseInt(textFieldNumberOfClusters.getText())));
-        gc.fillRect(0,0,canvasDiagram.getWidth(),canvasDiagram.getHeight());
+        gc.setStroke(javafx.scene.paint.Color.RED);
+        int x1=10;
+        int y1=10;
+        double x2=canvasDiagram.getWidth()-30;
+        double y2 =canvasDiagram.getHeight()-30;
+        gc.strokeRect(x1,y1,x2-10,y2-10);
+        //FOK
+        int n=13;
+
+        int trial[]= {1,2,3,4,4,4,5,5,56,4,67,8,54};
+        int max = getMax(trial);
+
+        Color cols[] ={Color.DARKMAGENTA,Color.BLUE,Color.ORANGE,Color.OLIVE,Color.AQUA,Color.BROWN,
+                Color.PURPLE,Color.CHOCOLATE,Color.YELLOWGREEN,Color.GRAY,Color.DARKKHAKI,Color.LIGHTSALMON, Color.LIGHTCORAL,
+                Color.LAWNGREEN};
+        for(int i=0; i<n;i++) {
+            double width = x2 - x1 - 20;
+            double height = y2 - y1;
+            gc.setStroke(cols[i]);
+            gc.setFill(cols[i]);
+            double x = (width / (n + 1)) * (i + 1) + 20;
+            double y = height - (height / max * trial[i]) + 10;
+            gc.strokeLine(x, y2, x, y1);
+        }
+
+        for(DataModel item : partialResult){
+            for(int i=0; i<n;i++) {
+                double width = x2 - x1 - 20;
+                double height = y2 - y1;
+                double x = (width / (n + 1)) * (i + 1) + 20;
+                double y = height - (height / max * trial[i]) + 10;
+                gc.setStroke(cols[i]);
+                gc.setFill(cols[i]);
+                gc.strokeText("["+i+"]",x,y2+15);
+                gc.fillRect(x,y,5,5);
+                if(i!=n-1){
+                    gc.strokeLine(x,y,(width/(n+1))*(i+2)+20,height - (height/max*trial[i+1])+10);
+                }
+            }
+        }
+
     }
 
     private void showErrorMessage(String message) {
