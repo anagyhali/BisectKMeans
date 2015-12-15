@@ -35,8 +35,10 @@
         <Label text="Metrika" GridPane.columnIndex="4" GridPane.rowIndex="1" />
         <ComboBox fx:id="comboBoxMetrics" GridPane.columnIndex="5" GridPane.rowIndex="1" />
 
-        <Label text="Leállási feltétel állítás" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-        <TextField fx:id="textFieldStopStatement" GridPane.columnIndex="1" GridPane.columnSpan="5" GridPane.rowIndex="2" />
+        <Label text="Leállási feltétel állítás - legkevesebb iteráció száma" GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.rowIndex="2" />
+        <TextField fx:id="textFieldMinimumIterations" GridPane.columnIndex="3"  GridPane.rowIndex="2" />
+        <Label text="centroidok maximális mozgása" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+        <TextField fx:id="textFieldMaximumCentroidMovement" GridPane.columnIndex="5" GridPane.rowIndex="2" />
 
         <ToggleButton fx:id="toggleBtnViewSteps" text="Megjelenítés lépésenként" GridPane.columnIndex="0" GridPane.rowIndex="3" />
         <Button fx:id="btnStartAlgorithm" onAction="#startAlgorithm" text="Algoritmus indítása" GridPane.columnIndex="1" GridPane.rowIndex="3" />

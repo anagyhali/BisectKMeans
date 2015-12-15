@@ -4,9 +4,7 @@ import hu.bme.mit.mihf.bisectkmeans.model.DataModel;
 
 import java.io.*;
 
-/**
- * Created by Tamás on 2015.11.15..
- */
+
 public class Loader extends Thread {
 
     private String inputPath;
