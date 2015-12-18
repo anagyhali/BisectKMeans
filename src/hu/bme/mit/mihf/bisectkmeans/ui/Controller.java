@@ -145,7 +145,7 @@ public class Controller {
         double maximumCentroidMovement = -1;
         if (!textFieldMaximumCentroidMovement.getText().isEmpty()) {
             try {
-                maximumCentroidMovement = Integer.parseInt(textFieldMinimumIterations.getText());
+                maximumCentroidMovement = Double.parseDouble(textFieldMaximumCentroidMovement.getText());
                 if (maximumCentroidMovement < 0)
                     throw new NumberFormatException();
             } catch (NumberFormatException e) {

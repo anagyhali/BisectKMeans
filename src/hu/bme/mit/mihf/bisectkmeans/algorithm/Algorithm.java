@@ -42,8 +42,14 @@ public class Algorithm extends Thread {
             clusters.add(initialModel);
             initialModel.setCentroid(EuclideanHelper.calculateCentroid(initialModel));
 
+            boolean firstBisection = true;
+
             while (clusters.size() < numberOfClusters) {
                 synchronized (syncObject) {
+                    if (stepMode && !firstBisection) {
+                        observer.algorithmPaused(clusters);
+                        syncObject.wait();
+                    }
 
                     DataModel biggestSSEcluster = null;
                     double biggestSSE = 0;
@@ -73,53 +79,43 @@ public class Algorithm extends Thread {
                         }
                     }
 
-                    classifyPoints();
-                    recalculateCentroids();
+                    if (firstBisection) firstBisection = false;
 
-                    for (int i = 0; i < minimumIterations; i++) {
+                    double currentCentroidMovement;
+
+                    classifyPoints();
+                    currentCentroidMovement = recalculateCentroids();
+
+                    for (int i = 0; i < minimumIterations - 1; i++) {
+                        if (stepMode) {
+                            observer.algorithmPaused(clusters);
+                            syncObject.wait();
+                        }
                         prevClusters = clusters;
                         clusters = new ArrayList<DataModel>();
                         for (DataModel cluster : prevClusters) {
                             clusters.add(new DataModel(cluster.getCentroid()));
                         }
                         classifyPoints();
-                        recalculateCentroids();
+                        currentCentroidMovement = recalculateCentroids();
                     }
 
                     if (maximumCentroidMovement > 0) {
-
-                        double currentCentroidMovement = maximumCentroidMovement + 1;
-
                         while (currentCentroidMovement > maximumCentroidMovement) {
-
+                            if (stepMode) {
+                                observer.algorithmPaused(clusters);
+                                syncObject.wait();
+                            }
                             prevClusters = clusters;
                             clusters = new ArrayList<DataModel>();
                             for (DataModel cluster : prevClusters) {
                                 clusters.add(new DataModel(cluster.getCentroid()));
                             }
 
-                            currentCentroidMovement = 0;
-
                             classifyPoints();
-
-                            for (DataModel cluster : clusters) {
-                                DataModel.GraphInfo newCentroid = EuclideanHelper.calculateCentroid(cluster);
-
-                                double centroidDistance = metrics.distance(cluster.getCentroid(), newCentroid);
-
-                                currentCentroidMovement = currentCentroidMovement < centroidDistance ? centroidDistance : currentCentroidMovement;
-
-                                cluster.setCentroid(newCentroid);
-                            }
+                            currentCentroidMovement = recalculateCentroids();
                         }
                     }
-
-                    if (stepMode && clusters.size() < numberOfClusters) {
-                        observer.algorithmPaused(clusters);
-                        syncObject.wait();
-                    }
-
-
                 }
             }
 
@@ -130,10 +126,19 @@ public class Algorithm extends Thread {
         }
     }
 
-    private void recalculateCentroids() {
+    private double recalculateCentroids() {
+        double currentCentroidMovement = 0;
+
         for (DataModel cluster : clusters) {
-            cluster.setCentroid(EuclideanHelper.calculateCentroid(cluster));
+            DataModel.GraphInfo newCentroid = EuclideanHelper.calculateCentroid(cluster);
+
+            double centroidDistance = metrics.distance(cluster.getCentroid(), newCentroid);
+
+            currentCentroidMovement = currentCentroidMovement < centroidDistance ? centroidDistance : currentCentroidMovement;
+
+            cluster.setCentroid(newCentroid);
         }
+        return currentCentroidMovement;
     }
 
     private void classifyPoints() {

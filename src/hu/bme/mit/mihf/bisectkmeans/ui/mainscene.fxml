@@ -48,14 +48,13 @@
             <TextField fx:id="textFieldMaximumCentroidMovement" GridPane.columnIndex="5" GridPane.rowIndex="2"/>
 
             <ToggleButton fx:id="toggleBtnViewSteps" text="Megjelenítés lépésenként" GridPane.columnIndex="0"
-                          GridPane.rowIndex="3"/>
-            <Button fx:id="btnStartAlgorithm" onAction="#startAlgorithm" text="Algoritmus indítása"
-                    GridPane.columnIndex="1" GridPane.rowIndex="3"/>
-            <Button fx:id="btnNextStep" disable="true" onAction="#nextStep" text="Következő lépés"
+                          GridPane.rowIndex="3" GridPane.columnSpan="2"/>
+            <Button fx:id="btnStartAlgorithm" onAction="#startAlgorithm" text="Algoritmus indítása" GridPane.columnSpan="2"
                     GridPane.columnIndex="2" GridPane.rowIndex="3"/>
+            <Button fx:id="btnNextStep" disable="true" onAction="#nextStep" text="Következő lépés"
+                    GridPane.columnIndex="4" GridPane.rowIndex="3"/>
             <Button fx:id="btnStopAlgorithm" disable="true" onAction="#stopAlgorithm" text="Állj"
-                    GridPane.columnIndex="3" GridPane.rowIndex="3"/>
-            <ProgressBar progress="0.5" GridPane.columnIndex="4" GridPane.columnSpan="2" GridPane.rowIndex="3"/>
+                    GridPane.columnIndex="5" GridPane.rowIndex="3"/>
 
             <StackPane fx:id="stackPaneCanvasHolder"  GridPane.columnIndex="0" GridPane.columnSpan="6" GridPane.rowIndex="4">
                 <ResizableCanvas fx:id="canvasDiagram"/>
