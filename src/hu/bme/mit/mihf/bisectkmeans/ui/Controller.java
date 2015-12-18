@@ -15,10 +15,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 
 import java.io.File;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 
 public class Controller {
@@ -36,11 +38,19 @@ public class Controller {
     public Button btnFileChooser;
     public Label labelInfoBar;
     public Canvas canvasDiagram;
+    public StackPane stackPaneCanvasHolder;
 
     private Thread backgroundWorker;
 
     public void handleWindowShownEvent() {
-        textFieldLoadFile.setText(new File("data/default_input.txt").getAbsolutePath());
+        canvasDiagram.widthProperty().bind(stackPaneCanvasHolder.widthProperty());
+        canvasDiagram.heightProperty().bind(stackPaneCanvasHolder.heightProperty());
+
+        try {
+            textFieldLoadFile.setText(new File(Controller.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath()).getParentFile().getPath().replace('\\', '/')+"/default_input.txt");
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
 
         comboBoxStartVector.getItems().setAll(StartVectorOptions.values());
         comboBoxStartVector.setValue(comboBoxStartVector.getItems().get(0));
@@ -48,6 +58,10 @@ public class Controller {
         comboBoxMetrics.getItems().setAll(MetricsOptions.values());
         comboBoxMetrics.setValue(comboBoxMetrics.getItems().get(0));
 
+        clearDiagram();
+    }
+
+    public void handleResizeEvent() {
         clearDiagram();
     }
 
@@ -200,19 +214,19 @@ public class Controller {
 
     private void showInitialState(DataModel model) {
         clearDiagram();
-        Diagramm dg = new Diagramm(canvasDiagram,13);
+        Diagramm dg = new Diagramm(canvasDiagram, DataModel.DIMENSION);
         dg.drawDiagramm(model, Color.GREEN, true);
     }
 
     private void showResult(ArrayList<DataModel> result) {
         clearDiagram();
-        Diagramm dg = new Diagramm(canvasDiagram,13);
+        Diagramm dg = new Diagramm(canvasDiagram, DataModel.DIMENSION);
         dg.drawDiagramm(result);
     }
 
     private void showPartialResult(ArrayList<DataModel> partialResult) {
         clearDiagram();
-        Diagramm dg = new Diagramm(canvasDiagram,13);
+        Diagramm dg = new Diagramm(canvasDiagram, DataModel.DIMENSION);
         dg.drawDiagramm(partialResult);
     }
 

@@ -32,7 +32,7 @@ public class Loader extends Thread {
             while ((line = reader.readLine()) != null) {
                 if (!line.isEmpty()) {
                     String[] split = line.split("\\s");
-                    if (split.length != 14) {
+                    if (split.length != DataModel.DIMENSION + 1) {
                         handler.onError("Error: Input file - bad line (" + line + ")");
                         return;
                     }
@@ -41,7 +41,7 @@ public class Loader extends Thread {
 
                     info.pointID = Integer.parseInt(split[0]);
 
-                    for (int i = 1; i < 14; i++) {
+                    for (int i = 1; i < DataModel.DIMENSION + 1; i++) {
                         info.numberOfVertices[i - 1] = Integer.parseInt(split[i]);
                     }
                     model.add(info);

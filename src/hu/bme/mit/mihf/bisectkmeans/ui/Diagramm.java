@@ -53,6 +53,7 @@ public class Diagramm {
     void drawDiagramm(DataModel datas,Color klasztercolor,boolean firstklaszter){
         GraphicsContext gc = canvasDiagram.getGraphicsContext2D();
         gc.setStroke(javafx.scene.paint.Color.RED);
+        gc.setLineWidth(1.0);
         int x1=10;
         int y1=10;
         double x2=canvasDiagram.getWidth()-30;
@@ -89,6 +90,8 @@ public class Diagramm {
                 gc.strokeText("[ " + max[i] + " ]", x, y1);
             }
         }
+
+        gc.setLineWidth(0.1);
 
         for (DataModel.GraphInfo trial: datas) {
             for (int i = 0; i < dim; i++) {

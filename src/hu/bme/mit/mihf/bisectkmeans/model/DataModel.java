@@ -6,6 +6,8 @@ import java.util.ArrayList;
 
 
 public class DataModel extends ArrayList<DataModel.GraphInfo> {
+    public static final int DIMENSION = 13;
+
     public DataModel(GraphInfo centroid) {
         this.centroid = centroid;
     }
@@ -17,7 +19,7 @@ public class DataModel extends ArrayList<DataModel.GraphInfo> {
     public static class GraphInfo {
         public int pointID;
         // the array's index is the degree
-        public float[] numberOfVertices = new float[13];
+        public float[] numberOfVertices = new float[DIMENSION];
     }
 
     private GraphInfo centroid;
